@@ -9,6 +9,7 @@ venv.bak/
 
 #db 
 .sql 
+.db 
 
 SECRET_KEY = 'bandit123!$stephen'
 DB_HOST = 'db.luddy.indiana.edu'
