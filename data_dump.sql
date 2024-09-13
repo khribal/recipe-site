@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS ingredients (
 
 CREATE TABLE IF NOT EXISTS categories (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL
+    name TEXT NOT NULL, 
+    item_img TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS recipes (
@@ -15,6 +16,7 @@ CREATE TABLE IF NOT EXISTS recipes (
     summary TEXT,
     prep_time INTEGER,
     cook_time INTEGER,
+    serves TEXT,
     category_id INTEGER,
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
@@ -48,8 +50,8 @@ INSERT INTO ingredients (name) VALUES
     ('Pecans'),
     ('Strawberries');
 
-INSERT INTO categories (name) VALUES 
-    ('Breakfast');
+INSERT INTO categories (name, item_img) VALUES 
+    ('Breakfast', 'https://food.fnr.sndimg.com/content/dam/images/food/plus/fullset/2020/04/30/0/FNK_The-Best-Cheddar-And-Herb-Chaffle_H_s4x3.jpg.rend.hgtvcom.1280.960.suffix/1588257306685.jpeg');
 
 INSERT INTO recipes (title, summary, prep_time, cook_time, serves, category_id) VALUES 
     ('Cinnamon Sugar Oatmeal', 'A warm, comforting bowl of hearty oatmeal topped with a sprinkle of sweet cinnamon and sugar, delivering a perfect blend of cozy flavors for a satisfying breakfast.', 10, 5, 1, 1);

@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Navbar</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/nav.css')}}">
 </head>
 
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">
-                <a href="#"><img src="logo.png" alt="Logo"></a>
+                <a href="#"><img src="{{url_for('static', filename='img/test.png')}}" alt="Logo"></a>
             </div>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -27,7 +27,10 @@
             </ul>
         </nav>
     </header>
-
+    {% for recipe in recipes %}
+    <li>{{ recipe['title'] }}</li>
+    {% endfor %}
+    <p>just checking</p>
     <script src="js/nav.js"></script>
 </body>
 
