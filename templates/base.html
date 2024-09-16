@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/nav.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/general.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+</head>
+
+<body>
+    <nav>
+        <img src="{{ url_for('static', filename='img/test.png') }}" alt="Logo">
+        <h3>Header</h3>
+        <p>Some content</p>
+        <ul>
+            <li>Recipes</li>
+            <li>Favorites</li>
+        </ul>
+        <img src="{{ url_for('static', filename='img/test.png') }}" alt="Logo" class="bottom-nav">
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/recipe_ajax.js') }}"></script>
+
+</body>
+
+</html>

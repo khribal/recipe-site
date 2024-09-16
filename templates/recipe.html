@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for item in recipe %}
+<li>{{ item['title'] }}</li>
+<li>{{ item['summary'] }}</li>
+<li>{{ item['prep_time'] }}</li>
+<li>{{ item['cook_time'] }}</li>
+<li>{{ item['serves'] }}</li>
+<img src="{{ item['recipe_img'] }}" alt="Bowl of oatmeal">
+{% endfor %}
+
+{% for ingredient in ingredients %}
+<li>
+    {{ ingredient }}
+</li>
+{% endfor %}
+{% endblock %}

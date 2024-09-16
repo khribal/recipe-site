@@ -1,37 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Navbar</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/nav.css')}}">
-</head>
-
-<body>
+{% block content %}
+<main>
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="#"><img src="{{url_for('static', filename='img/test.png')}}" alt="Logo"></a>
+        <div class="header-content">
+            <p>Learn, Cook, and Enjoy!</p>
+            <div class="count">
+                <h4>{{ recipe_count }}</h4>
+                <p>recipes</p>
             </div>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    {% for recipe in recipes %}
-    <li>{{ recipe['title'] }}</li>
-    {% endfor %}
-    <p>just checking</p>
-    <script src="js/nav.js"></script>
-</body>
 
-</html>
+        </div>
+        <div class="category-buttons">
+
+            <li class="category-btn">
+                <a href="#" class="category-link" data-category-id="0">All</a>
+            </li>
+
+            {% for category in categories %}
+            <li>
+                <!-- <img src="{{ category.item_img }}" alt="Category Image"> -->
+                <a href="#" class="category-link" data-category-id="{{ category.id }}">
+                    {{ category.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </div>
+    </header>
+
+
+
+    <!-- {% for tag in tags %}
+<li>
+    <img src="{{ tag.recipe_imag }}" alt="Category Image">
+    <a href="{{ url_for('home') }}">
+        {{ tag.tag_name }}
+    </a>
+</li>
+{% endfor %} -->
+
+
+    <h2>Recipes</h2>
+    <div id="recipe-container">
+        {{ recipes_html | safe }}
+    </div>
+
+</main>
+{% endblock %}

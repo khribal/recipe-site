@@ -20,6 +20,19 @@ def get_recipes():
     
     return recipes
 
+#Select specific recipe 
+def get_a_recipe(recipe_id):
+    sql = "SELECT * FROM recipes where id=?"
+    conn = get_db()
+
+    conn.row_factory = sqlite3.Row  
+    with conn: 
+        cursor = conn.cursor() 
+        cursor.execute(sql, (recipe_id,))
+        recipes = cursor.fetchall()
+    
+    return recipes
+
 #Get ingredients for recipe based on recipe ID 
 def get_ingredients(recipeID):
     sql = "SELECT i.name FROM ingredients i JOIN recipe_ingredients ri ON i.id = ri.ingredient_id WHERE ri.recipe_id = ?"
@@ -46,6 +59,19 @@ def get_tags():
     
     return tags
 
+#Return first recipe image with the tag, to display with the tag
+def get_tag_and_img():
+    sql = "SELECT t.name AS tag_name, MIN(r.recipe_img) AS recipe_imag FROM tags as t JOIN recipe_tag rt ON t.id = rt.tag_id JOIN recipes r ON rt.recipe_id = r.id GROUP BY t.name;"
+    conn = get_db()
+
+    conn.row_factory = sqlite3.Row  
+    with conn: 
+        cursor = conn.cursor() 
+        cursor.execute(sql)
+        tag_img = cursor.fetchall()
+    
+    return tag_img
+
 #Return all the categories of foods
 def get_categories():
     sql = "SELECT * FROM categories"
@@ -55,6 +81,20 @@ def get_categories():
     with conn: 
         cursor = conn.cursor() 
         cursor.execute(sql)
+        categories = cursor.fetchall()
+    
+    return categories
+
+
+#Return all the recipes by category ID
+def get_category_recipes(category_id):
+    sql = "SELECT * FROM recipes where category_id = ?"
+    conn = get_db()
+
+    conn.row_factory = sqlite3.Row  
+    with conn: 
+        cursor = conn.cursor() 
+        cursor.execute(sql, (category_id,))
         categories = cursor.fetchall()
     
     return categories

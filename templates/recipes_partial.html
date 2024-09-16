@@ -1,0 +1,8 @@
+<ul>
+    {% for recipe in recipes %}
+    <li>
+        <h3>{{ recipe.title }}</h3>
+        <img src="{{ recipe.recipe_img }}" alt="{{ recipe.title }}" style="width: 200px; height: auto;">
+    </li>
+    {% endfor %}
+</ul>

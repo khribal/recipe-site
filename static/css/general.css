@@ -1,0 +1,9 @@
+main {
+    /* position: fixed;
+    top: 0;
+    right: 0; */
+    width: 85%;
+    float: right;
+    background-color: grey;
+    height: 100%;
+}

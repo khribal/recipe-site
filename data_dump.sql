@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS recipes (
     prep_time INTEGER,
     cook_time INTEGER,
     serves TEXT,
+    recipe_img TEXT,
     category_id INTEGER,
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
@@ -53,8 +54,8 @@ INSERT INTO ingredients (name) VALUES
 INSERT INTO categories (name, item_img) VALUES 
     ('Breakfast', 'https://food.fnr.sndimg.com/content/dam/images/food/plus/fullset/2020/04/30/0/FNK_The-Best-Cheddar-And-Herb-Chaffle_H_s4x3.jpg.rend.hgtvcom.1280.960.suffix/1588257306685.jpeg');
 
-INSERT INTO recipes (title, summary, prep_time, cook_time, serves, category_id) VALUES 
-    ('Cinnamon Sugar Oatmeal', 'A warm, comforting bowl of hearty oatmeal topped with a sprinkle of sweet cinnamon and sugar, delivering a perfect blend of cozy flavors for a satisfying breakfast.', 10, 5, 1, 1);
+INSERT INTO recipes (title, summary, prep_time, cook_time, serves, recipe_img, category_id) VALUES 
+    ('Cinnamon Sugar Oatmeal', 'A warm, comforting bowl of hearty oatmeal topped with a sprinkle of sweet cinnamon and sugar, delivering a perfect blend of cozy flavors for a satisfying breakfast.', 10, 5, 1, 'https://simple-veganista.com/wp-content/uploads/2018/11/cinnamon-oatmeal.jpg', 1);
 
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES 
     (1, 1),
@@ -63,10 +64,10 @@ INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES
     (1, 4);
 
 INSERT INTO tags (name) VALUES 
-    ('Sugar'),
-    ('Sweet'),
-    ('Fruit'),
-    ('Berries');
+    ('30 minute'),
+    ('Side dish'),
+    ('Dairy-Free'),
+    ('Mediterranean');
 
 INSERT INTO recipe_tag (recipe_id, tag_id) VALUES 
     (1, 1),
