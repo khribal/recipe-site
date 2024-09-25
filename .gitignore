@@ -11,10 +11,7 @@ venv.bak/
 .sql 
 .db 
 
-SECRET_KEY = 'bandit123!$stephen'
-DB_HOST = 'db.luddy.indiana.edu'
-DB_PORT = 3306
-DB_USER = 'i211s23_klhribal'
-DB_PASS = 'my+sql=i211s23_klhribal'
-DB_DATABASE = 'i211s23_klhribal'
+config.py 
+
+
 

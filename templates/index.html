@@ -1,46 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% block title %}Kim's Recipes{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
+
 <main>
     <header>
         <div class="header-content">
-            <p>Learn, Cook, and Enjoy!</p>
+            <h1>Learn, Cook, & Enjoy!</h1>
             <div class="count">
-                <h4>{{ recipe_count }}</h4>
+                <h2>{{ recipe_count }}</h2>
                 <p>recipes</p>
             </div>
-
         </div>
         <div class="category-buttons">
-
-            <li class="category-btn">
-                <a href="#" class="category-link" data-category-id="0">All</a>
-            </li>
-
+            <button href="#" class="category-link" data-category-id="0">All recipes</button>
             {% for category in categories %}
-            <li>
-                <!-- <img src="{{ category.item_img }}" alt="Category Image"> -->
-                <a href="#" class="category-link" data-category-id="{{ category.id }}">
-                    {{ category.name }}
-                </a>
-            </li>
+            <button href="#" class="category-link" data-category-id="{{ category.id }}">
+                {{ category.name }}
+            </button>
             {% endfor %}
         </div>
     </header>
 
 
-
-    <!-- {% for tag in tags %}
-<li>
-    <img src="{{ tag.recipe_imag }}" alt="Category Image">
-    <a href="{{ url_for('home') }}">
-        {{ tag.tag_name }}
-    </a>
-</li>
-{% endfor %} -->
-
-
-    <h2>Recipes</h2>
     <div id="recipe-container">
         {{ recipes_html | safe }}
     </div>

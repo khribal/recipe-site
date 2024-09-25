@@ -1,10 +1,43 @@
-from flask import Flask, render_template, g, jsonify
-import sqlite3
-import os
+from flask import Flask, render_template, g, jsonify, redirect, session, request, url_for
 import database
-
+import auth 
 
 app = Flask(__name__)
+
+#secret key
+app.config.from_pyfile('config.py')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        auth.login_user(username, password)
+        
+        if 'role' in session:
+            return redirect(url_for('home'))
+        else:
+            return "Login failed!"
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('login'))
+
+# Secure the route to only logged-in users
+@app.route('/add_recipe', methods=['GET', 'POST'])
+def add_recipe():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        # Logic to add the recipe to your database
+        # For example: recipe_name = request.form['recipe_name']
+        pass
+    
+    return render_template('add_recipe.html')
 
 
 @app.route('/')
@@ -48,8 +81,10 @@ def recipe(recipe_id):
     ingredients = database.get_ingredients(recipe_id)
 
     recipe = database.get_a_recipe(recipe_id)
+
+    instructions = database.get_instructions(recipe_id)
     # Render a template, passing the recipes to the template
-    return render_template('recipe.html', ingredients=ingredients, recipe=recipe, recipe_id=recipe_id)
+    return render_template('recipe.html', ingredients=ingredients, recipe=recipe, recipe_id=recipe_id, instructions=instructions)
 
 
 @app.teardown_appcontext
@@ -61,5 +96,3 @@ def close_db(exception):
 # Call init_db() to create tables when the application starts
 if __name__ == '__main__':
     app.run(debug=True)
-
-

@@ -1,11 +1,12 @@
 from flask import g
 import sqlite3
+import bcrypt
 
 # Path to the SQLite database
 DATABASE = 'instance/recipes.db'
 
 def get_db():
-    return sqlite3.connect('recipes.db')
+    return sqlite3.connect('instance/recipes.db')
 
 #Return all the recipes within the category
 def get_recipes():
@@ -35,16 +36,29 @@ def get_a_recipe(recipe_id):
 
 #Get ingredients for recipe based on recipe ID 
 def get_ingredients(recipeID):
-    sql = "SELECT i.name FROM ingredients i JOIN recipe_ingredients ri ON i.id = ri.ingredient_id WHERE ri.recipe_id = ?"
+    sql = "SELECT i.name, ri.quantity, ri.unit FROM ingredients i JOIN recipe_ingredients ri ON i.id = ri.ingredient_id WHERE ri.recipe_id = ?"
     conn = get_db()
 
+    conn.row_factory = sqlite3.Row  
     with conn: 
         cursor = conn.cursor() 
         cursor.execute(sql, (recipeID,))
         ingredients = cursor.fetchall()
     
-        ingredient_names = [ingredient[0] for ingredient in ingredients]
-    return ingredient_names
+    return ingredients
+
+#Get instructions 
+def get_instructions(recipeID):
+    sql = "SELECT step_number, step_bold, step_description FROM recipe_steps WHERE recipe_id = ? ORDER BY step_number;"
+    conn = get_db()
+
+    conn.row_factory = sqlite3.Row  
+    with conn: 
+        cursor = conn.cursor() 
+        cursor.execute(sql, (recipeID,))
+        instructions = cursor.fetchall()
+    
+    return instructions
 
 #Return all the tags
 def get_tags():
@@ -99,5 +113,49 @@ def get_category_recipes(category_id):
     
     return categories
 
+#Get login credentials
+def get_login(): 
+    sql = "SELECT user, pass from admin_cred;"
+    conn = get_db()
 
+    with conn: 
+        cursor = conn.cursor() 
+        cursor.execute(sql)
+        creds = cursor.fetchall()
+    login = [cred for cred in creds]
+
+    return login
    
+
+def insert_user(username, password):
+    user = username
+    passw = password 
+
+    hashed_password = bcrypt.hashpw(passw.encode('utf-8'), bcrypt.gensalt())
+    conn = get_db()
+    cursor = conn.cursor()
+
+    insert_query = '''
+        INSERT INTO users (username, password, role) 
+        VALUES (?, ?, ?)
+    '''
+
+    cursor.execute(insert_query, (user, hashed_password, 'user'))
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
+
+    return 
+
+def get_user_by_username(username):
+    conn = get_db()
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT username, password, role FROM users WHERE username = ?", (username,))
+    user = cursor.fetchone()
+    
+    conn.close()
+    
+    return user
+
