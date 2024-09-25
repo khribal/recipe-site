@@ -1,0 +1,16 @@
+<div class="recipes">
+    <div class="recipe-container">
+        {% for recipe in recipes %}
+        <div class="img-container">
+            <img src="{{ recipe.recipe_img }}" alt="{{ recipe.title }}" class="img">
+        </div>
+
+        <h3>{{ recipe.title }}</h3>
+
+        <div class="view-recipe">
+            <p>{{ recipe.prep_time + recipe.cook_time}} minutes</p>
+            <a href="{{ url_for('recipe', recipe_id=recipe.id) }}"><button>View recipe</button></a>
+        </div>
+        {% endfor %}
+    </div>
+</div>

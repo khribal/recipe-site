@@ -1,0 +1,62 @@
+:root {
+    --darkgrey: #373737;
+    --pink: #ec729c;
+    --lightpink: #f4aeba;
+    --white: #ffffff;
+    --grey: #e3e3e3;
+}
+
+/* Recipe categories / header */
+.category-buttons {
+    display: flex;
+    gap: 2em;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* RECIPE CARDS */
+.recipes {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2em 0;
+}
+
+.img-container {
+    width: 20%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.recipe-container {
+    background-color: white;
+    border-radius: 2em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.view-recipe {
+    display: flex;
+    gap: 2em;
+    padding-top: 1em;
+    border-top: 2px solid var(--grey);
+    align-items: center;
+}
+
+/* Category link */
+.category-link {
+    background-color: white;
+}

@@ -1,37 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Navbar</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/nav.css')}}">
-</head>
+{% block content %}
 
-<body>
+{% block title %}Kim's Recipes{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
+
+<main>
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="#"><img src="{{url_for('static', filename='img/test.png')}}" alt="Logo"></a>
+        <div class="header-content">
+            <h1>Learn, Cook, & Enjoy!</h1>
+            <div class="count">
+                <h2>{{ recipe_count }}</h2>
+                <p>recipes</p>
             </div>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+        </div>
+        <div class="category-buttons">
+            <button href="#" class="category-link" data-category-id="0">All recipes</button>
+            {% for category in categories %}
+            <button href="#" class="category-link" data-category-id="{{ category.id }}">
+                {{ category.name }}
+            </button>
+            {% endfor %}
+        </div>
     </header>
-    {% for recipe in recipes %}
-    <li>{{ recipe['title'] }}</li>
-    {% endfor %}
-    <p>just checking</p>
-    <script src="js/nav.js"></script>
-</body>
 
-</html>
+
+    <div id="recipe-container">
+        {{ recipes_html | safe }}
+    </div>
+
+</main>
+{% endblock %}

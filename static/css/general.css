@@ -1,0 +1,100 @@
+:root {
+    --darkgrey: #373737;
+    --pink: #ec729c;
+    --lightpink: #f4aeba;
+    --white: #ffffff;
+    --grey: #e3e3e3;
+}
+
+/*Structure */
+html,
+body {
+    height: 100%;
+}
+
+
+/*Fonts */
+p,
+li,
+small,
+figcaption,
+button {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Spicy Rice", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+main {
+    background-color: var(--grey);
+    border-radius: 1em;
+    padding: 1em;
+}
+
+/* Colors */
+body {
+    color: var(--darkgrey);
+}
+
+/* Buttons */
+button {
+    background-color: var(--lightpink);
+    border-radius: 1em;
+    border: 2px solid var(--pink);
+    color: var(--darkgrey);
+    font-weight: bold;
+    padding: 0.5em 1em;
+}
+
+button:hover {
+    background-color: transparent;
+    color: var(--pink);
+    border: 2px solid var(--lightpink);
+}
+
+/* Mobile hide */
+.hide {
+    display: none;
+}
+
+.mobile-hide {
+    display: none;
+}
+
+main {
+    margin: 0.5em 1em;
+}
+
+@media (min-width: 768px) {
+    main {
+        width: 75%;
+        position: absolute;
+        top: 0;
+        right: 0.5em;
+        margin-bottom: 1em;
+    }
+
+    .mobile-hide {
+        display: flex;
+    }
+
+    /* .hide {
+        display: flex;
+    } */
+}
+
+@media (min-width: 868px) {
+    main {
+        width: 80%;
+    }
+}

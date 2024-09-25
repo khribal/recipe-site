@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% for item in recipe %}
+{{ item['title'] }}
+{% endfor %}
+
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/recipe.css')}}">
+{% endblock %}
+
+{% block content %}
+<main>
+
+    {% for item in recipe %}
+
+    <header>
+        <div class="content">
+            <div class="title">
+                <h1>{{ item['title'] }}</h1>
+            </div>
+            <div class="info">
+                <p>Serves: {{ item['serves'] }}</p>
+                <p>Prep: {{ item['prep_time'] }} mins</p>
+                <p>Cook: {{ item['cook_time'] }} mins</p>
+            </div>
+            <div class="summary">
+                <img src="{{url_for('static', filename='img/fork.png')}}" alt="Fork">
+                <div>
+                    <p>{{ item['summary'] }}</p>
+                    <p>Keep scrolling to learn how to make this recipe!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-img">
+            <img src="{{ item['recipe_img'] }}" alt="Bowl of oatmeal" class="img">
+        </div>
+    </header>
+
+    <section>
+        <h2>The Recipe</h2>
+        <div class="recipe-container">
+            <div class="ingredients">
+                <h3>Ingredients</h3>
+                {% for ingredient in ingredients %}
+                <li>
+                    {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name }}
+                </li>
+                {% endfor %}
+            </div>
+
+            <div class="instructions">
+                <h3>Directions</h3>
+                {% for instruction in instructions %}
+                <li>{{instruction.step_number}}. <strong>{{instruction.step_bold}}</strong>:
+                    {{instruction.step_description}}
+                </li>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <div class="final">
+        <p>Enjoy your delicious {{item.title}}! Don't forget to checkout other recipes on my site!</p>
+        <button>Back to recipes</button>
+    </div>
+    {% endfor %}
+</main>
+
+{% endblock %}

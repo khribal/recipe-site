@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Default Title{% endblock %}</title>
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Spicy+Rice&display=swap"
+        rel="stylesheet">
+
+    <!-- Global CSS for all pages -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/nav.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/general.css')}}">
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+
+    <nav>
+        <i id="menu-btn" class="fa-solid fa-bars"></i>
+
+        {% if session['logged_in'] %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+
+        <div id="menu" class="hide">
+            <div class="menu">
+                <img src="{{ url_for('static', filename='img/chef_hat.png') }}" alt="Logo">
+                <h3>Kim's Recipes</h3>
+                <div class="nav-list">
+                    <a href="{{ url_for( 'home' ) }}"><button>Recipes</button></a>
+                    <a href="{{ url_for( 'home') }}"><button>Favorites</button></a>
+                    {% if session['role'] == 'admin' %}
+                    <a href="{{ url_for( 'home') }}"><button>Add Recipe</button></a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <img src="{{ url_for('static', filename='img/btm-img1.png') }}" alt="Logo" class="bottom-nav mobile-hide">
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/recipe_ajax.js') }}"></script>
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/9a3fe9bd1f.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
